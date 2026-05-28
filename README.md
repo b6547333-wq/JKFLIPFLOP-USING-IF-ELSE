@@ -33,19 +33,44 @@ By using three variable K-Map, we can get the simplified expression for next sta
 The maximum possible groupings of adjacent ones are already shown in the figure. Therefore, the simplified expression for next state Qt+1t+1 is Q(t+1)=JQ(t)′+K′Q(t)Q(t+1)=JQ(t)′+K′Q(t)
 
 **Procedure**
-step-1 Go to quartus software. step-2 Set new environment. step-3 Type the code to implement SR flipflop using verilog and validating their functionality using their functional tables. step-4 Run the program. step-5 Give inputs in the waveform table . step-6 Run the program.
+1.Define Inputs/Outputs: Inputs: J (Set), K (Reset), c1k (clock); Outputs: q, qbar (~q).
+
+2.Initialization: Set q = 0 and qbar = 1 at the start of the simulation.
+
+3.JK Flip-Flop Logic: On posedge c1k, compute q
+
+4.Complementary Output: Update qbar = ~q to maintain complementarity.
+
+5.Testbench: Simulate with combinations of J, K, and c1k to verify JK Flip-Flop functionality.
+
 
 
 **PROGRAM**
-module JK(J,K,Qt,Y); input J,K,Qt; output Y; assign Y = J & ~Qt | ~K & Qt; endmodule
-Developed by:Thiru subramania sami RegisterNumber:25000201
+```
+module exp5(J,K,c1k,q,qbar);
+input J,K,c1k;
+output reg q;
+output reg qbar;
+initial q=0;
+initial qbar=1;
+always @(posedge c1k)
+begin
+q=((J&(~q)))|((~K)&q);
+qbar=~q;
+end
+endmodule
+```
+/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: udhayamoorthy A RegisterNumber:212225040477
+*/
+
+Developed by:Thiru subramania sami RegisterNumber:212225240176
 
 
 **RTL LOGIC FOR FLIPFLOPS**
-<img width="639" height="226" alt="image" src="https://github.com/user-attachments/assets/2f38c395-adcc-4b14-8b43-1cd9bc1d9d3d" />
+<img width="548" height="292" alt="597331424-c72b3a0e-16d9-49cc-b5e3-e989690d3bce" src="https://github.com/user-attachments/assets/41c210c6-5ea1-406c-868e-110b413ff482" />
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
-<img width="1779" height="372" alt="image" src="https://github.com/user-attachments/assets/d49878bb-3903-448c-989a-f10440a2c8a0" />
+<img width="1625" height="222" alt="597331455-5a6d6f80-ba6e-4bd5-b1ec-69fdc7f6c5c0" src="https://github.com/user-attachments/assets/83262f93-268c-4703-9573-564641f73137" />
 
 **RESULTS**
- JK flipflop using verilog and validating their functionality using their functional tables
+Thus the JK flipflop is implemented and verified.
